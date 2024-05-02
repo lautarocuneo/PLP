@@ -1,0 +1,18 @@
+null :: [a] -> Bool
+
+head :: [a] -> a
+
+tail :: [a] -> [a]
+
+init :: [a] -> [a] //todos los elementos de una lista menos el ultimo.
+
+last :: [a] -> a //da el ultimo elemento de la lista.
+
+
+take :: Int -> [a] -> [a] //devuelve los primeros n elementos de la lista.
+
+drop :: Int -> [a] -> [a] //elimina los primeros n elementos de la lista.
+
+(!!) :: [a] -> Int -> a //le das una lista y un indice y te da el elemento en ese indice.
+
+elem :: Eq a => a -> [a] -> Bool //Toma un valor y una lista, y devuelve True si el valor está presente en la lista, y False en caso contrario.

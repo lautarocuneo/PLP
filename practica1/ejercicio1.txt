@@ -1,0 +1,52 @@
+
+no currificada, recibe tupla, no se pueden separar los parametros.
+max2 :: Ord a => (a, a) -> a //ord dice que es ordenable y despues podria ser cualquier cosa a, pero tiene que ser delk mismo tipo b.
+max2 (x, y) | x >= y = x
+| otherwise = y
+
+
+no currificada, recibe tupla, no se pueden separar los parametros.
+normaVectorial :: (Float, Float) -> Float
+normaVectorial (x, y) = sqrt (x^2 + y^2)
+
+currificada, se puede entender como una funcion de un parametro que toma otra funcion de un parametro. 
+substract :: Num a => a -> a -> a
+substract = flip (-)
+
+
+currificada, porque toma un solo argumento.
+predecesor :: Num a => a -> a
+predecesor = subtract 1 
+//predecesor agarra un numero y devuelve el predecesor.
+
+//en este caso a es cero y devuelve algo de tipo b.
+currificada supongo.. ?
+evaluarEnCero :: (a -> b) -> b
+evaluarEnCero = \f -> f 0
+
+
+//la composicion de una funcion con sigo misma es aplicar la funcion a aplicar la funcion a algo.
+currificada
+La función f es de tipo a -> a en lugar de a -> b porque estás componiendo f con ella misma en la función dosVeces. En la composición de funciones,
+el tipo de salida de la primera función debe coincidir con el tipo de entrada de la segunda función.
+Si f fuera de tipo a -> b, entonces no podrías componer f con ella misma,
+porque la salida de la primera f (que es de tipo b) no coincidiría con la entrada de la segunda f (que es de tipo a).
+Por lo tanto, para que la composición f . f sea válida,
+f debe ser de tipo a -> a,
+lo que significa que toma un argumento de tipo a y devuelve un resultado del mismo tipo a.
+Esto asegura que la salida de la primera f coincida con la entrada de la segunda f en la composición. Espero que esto aclare tu duda! 😊
+
+dosVeces :: (a -> a) -> (a -> a)
+dosVeces = \f -> f . f
+
+//toma una lista de funciones, y le aplica la funcion flip a cada funcion, por lo tanto toma una lista de funciones de dos argumentos
+// y luego devuelve la misma lista con los argumentos dados vuelta para cada funcion.
+flipAll :: [(a -> b -> c)] -> [(b -> a -> c)]
+flipAll = map flip
+
+
+//toma una funcion y devuelve la misma funcion
+(a -> b -> c) -> (a -> b -> c)
+flipRaro = flip flip
+
+
