@@ -1,0 +1,84 @@
+{-Ejercicio 3-}
+
+objetos_en :: Universo -> [Objeto]
+objetos_en u = map objeto_de (filter es_un_objeto u)
+
+personajes_en :: Universo -> [Personaje]
+personajes_en u = [personaje_de x | x <- u, es_un_personaje x]
+
+filter :: (a -> Bool) -> [a] -> [a]
+filter p [] = []
+filter p (x : xs) = if p x
+                    then x : filter p xs
+                    else filter p xs
+
+map :: (a -> b) -> [a] -> [b]
+map f [] = []
+map f (x : xs) = f x : map f xs
+
+elem e [] = false 
+elem e (x:xs) = e == x || elem xs 
+
+DEMOSTRACIÓN ej3
+
+
+
+  queremos demostrar:
+
+    forall u :: [Either Personaje Objeto], forall o :: Objeto, forall p :: Either Personaje Objeto
+      elem o (objetos_en u) -> elem (Right o) u
+
+    basta con ver que para todo x :: Personaje. y :: Objeto.
+
+    y sabiendo que p = Left x con x:: Personaje o p = Right y con y :: Objeto.
+
+
+//vamos a probar esta con induccion estructural en u
+
+  1)  elem o (objetos_en u) -> elem (Right y) u
+
+vamos a mostrar que para todo us : [Either Personaje Objeto] vale P(us) donde P(us) es 
+
+ P(us) = elem o (objetos_en us) -> elem (Right y) us
+
+ las listas tienen un unico constructor base: []
+
+
+CASO BASE es P([]): 
+
+ P([]) = elem o (objetos_en []) -> elem (Right y) []
+
+ --por definicion de objetos_en: 
+
+ = elem o (map objeto_de (filter es_un_objeto u) []) -> elem (Right y) []
+
+ --por definicion de map f [] 
+
+  = elem o [] -> elem (Right y) []
+
+  --por definicion de elem: 
+
+  false -> false == true . listo caso base. 
+
+
+ CASO INDUCTIVO es P([]): 
+
+ Vamos a tener como HI a P(us) y vamos a probar P(us) => P(u:us). 
+
+como asumo verdadero P(us), solo queda ver que P(u:us) sea verdadero. 
+
+
+P(u:us) = elem o (objetos_en (u:us)) -> elem (Right y) (u:us)
+
+//completar ahora sigo en un rato.
+
+
+
+
+
+
+
+
+
+
+  2)  elem o (objetos_en u) -> elem (Left x) u
